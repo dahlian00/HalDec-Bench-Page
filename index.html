@@ -1,1 +1,525 @@
-## Coming Soon!
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HalDec-Bench</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/f8ddf9854a.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="description"
+          content="HalDec-Bench: Benchmarking Hallucination Detector in Image Captioning">
+    <meta name="keywords" content="HalDec-Bench, VLM, VLM Evaluation, Vision Language Model, Large Language Model, Large Multimodal Model, artificial intelligence, AI, artificial general intelligence">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HalDec-Bench: Benchmarking Hallucination Detector in Image Captioning</title>
+
+    <link rel="icon" href="./static/images/agro_icon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <script src="https://kit.fontawesome.com/fff5b27ec1.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/eaf1856e6f.js" crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+  </head>
+  <body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <!-- <div class="navbar-menu">
+        <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More Research
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="https://dahlian00.github.io/AnimalCluePage/">
+                <b>AnimalClue</b> <span style="font-size:18px; display: inline; margin-left: 5px;">🔥</span>
+              </a>
+              <a class="navbar-item" href="https://dahlian00.github.io/PetFacePage/">
+                <b>PetFace</b> <span style="font-size:18px; display: inline; margin-left: 5px;">🔥</span>
+              </a>
+              <a class="navbar-item" href="https://dahlian00.github.io/SegRCDBPage/">
+                SegRCDB
+              </a>
+            
+          </div>
+        </div> -->
+      </div>
+    </nav>
+
+
+
+    <!-- AFTER（修正後） -->
+    <section class="hero">
+      <div class="hero-body has-text-centered">
+        <h1 class="title is-1 publication-title is-bold">
+          <!-- <img src="static/images/agro_icon.png" style="width:1em; vertical-align: middle" alt="Logo"/> -->
+          <span class="mmmu" style="vertical-align: middle">HalDec-Bench</span>
+        </h1>
+        <h2 class="subtitle is-3 publication-subtitle">
+          HalDec-Bench: Benchmarking Hallucination Detector in Image Captioning
+        </h2>
+        <!-- <h3 class="subtitle is-3 publication-subtitle">
+          a
+        </h3> -->
+        <div class="is-size-5 publication-authors">
+          <br>
+          <span class="author-block">
+            <a href="https://ksaito-ut.github.io/" style="text-decoration: none; color: inherit;">Kuniaki Saito*<sup>1</sup></a>,
+          </span>
+          <span class="author-block">
+            <a href="https://sites.google.com/view/risashinoda/home" style="text-decoration: none; color: inherit;">Risa Shinoda*<sup>2</sup></a>,
+          </span>
+          <span class="author-block">
+            <a href="https://shohei-ta-ds7.github.io/" style="text-decoration: none; color: inherit;">Shohei Tanaka<sup>1</sup></a>,
+          </span>
+          <span class="author-block">
+            <a href="https://toshohirasawa.github.io/" style="text-decoration: none; color: inherit;">Tosho Hirasawa<sup>1</sup></a>,
+          </span>
+          <span class="author-block">
+            <a href="https://fokura.jp/" style="text-decoration: none; color: inherit;">Fumio Okura<sup>3</sup></a>,
+          </span>
+          <span class="author-block">
+            <a href="https://yoshitakaushiku.net/index.html" style="text-decoration: none; color: inherit;">Yoshitaka Ushiku<sup>1</sup></a>
+          </span>
+        </div>
+        <div class="is-size-6 has-text-centered mt-3">
+          <p><sup>1</sup>OMRON SINIC X <sup>2</sup>The University of Tokyo<sup>3</sup>The University of Osaka</p>
+          <p><sup>*</sup>Equal contribution. Kuniaki serves as the project lead, while Risa is responsible for dataset construction.</p> 
+        </div>
+      </div>
+      <div class="column has-text-centered">
+        <div class="publication-links">
+          <span class="link-block">
+            <a href="https://arxiv.org/abs/2603.15253" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+      <span class="link-block">
+        <a class="external-link button is-normal is-rounded is-dark"
+          style="background-color:#aaa; border-color:#aaa; color:#666; pointer-events:none; cursor:not-allowed; opacity:0.7;">
+          <span class="icon" style="font-size:18px">🤗</span>
+          <span>Dataset</span>
+        </a>
+      </span>
+          <!-- <span class="link-block">
+            <a href="https://github.com/dahlian00/AgroBench/tree/main" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span>Code</span>
+            </a>
+          </span> -->
+        </div>
+      </div>
+    </section>
+
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <img src="static/images/teaser.png" alt="geometric reasoning",style="margin-top: 20rem;">
+        <p>We introduce a novel benchmark, HalDec-Bench, which evaluates the VLM’s ability to detect hallucinations in captions. We employ state-of-the-art VLMs to generate image-caption pairs (Captioner) and manually annotate the hallucinated parts when present. We benchmark diverse VLMs as Detector and find that subtle hallucinations can be hard to detect, even by state-of-the-art VLMs.
+        </p>
+      </div>
+    </section> 
+
+    <section class="section">
+      <div class="container" style="margin-bottom: 2vh;">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">🔔News</h2>
+            <div class="content has-text-justified">
+              <p>
+                🔥[2026-03-16] Introducing HalDec-Bench, which evaluates the VLM's ability to detect hallucinations in captions ! 🚀
+              </p>
+          </div>
+            <h2 class="title is-3">Abstruct</h2>
+            <div class="content has-text-justified">
+              <p>
+                Hallucination detection in captions (HalDec) assesses a vision-language model’s ability to correctly align image content with text by identifying errors in captions that misrepresent the image. 
+                Beyond evaluation, effective hallucination detection is also essential for curating high-quality image-caption pairs used to train VLMs. 
+                However, the generalizability of VLMs as hallucination detectors across different captioning models and hallucination types remains unclear due to the lack of a comprehensive benchmark. 
+                In this work, we introduce HalDec-Bench, a benchmark designed to evaluate hallucination detectors in a principled and interpretable manner. 
+                HalDec-Bench contains captions generated by diverse VLMs together with human annotations indicating the presence of hallucinations, detailed hallucination-type categories, and segment-level labels. 
+                The benchmark provides tasks with a wide range of difficulty levels and reveals performance differences across models that are not visible in existing multimodal reasoning or alignment benchmarks. Our analysis further uncovers two key findings. 
+                First, detectors tend to recognize sentences appearing at the beginning of a response as correct, regardless of their actual correctness. 
+                Second, our experiments suggest that dataset noise can be substantially reduced by using strong VLMs as filters while employing recent VLMs as caption generators. 
+              </p>
+            </div>
+          </div>
+        </div>
+    
+    </div>
+    </section>
+
+    <!-- DATASET SECTION -->
+    <!-- <section class="hero is-light is-small">
+      <div class="hero-body has-text-centered">
+        <h1 class="title is-1 mmmu">
+          <img src="static/images/agro_icon.png" alt="Logo" class="mmmu-logo"/>
+          <span class="mmmu">AnimalClue</span>
+        </h1>
+      </div>
+    </section> -->
+    <section class="hero is-light is-small">
+      <div class="hero-body has-text-centered">
+        <h1 class="title is-1 mmmu">
+          <!-- <img src="static/images/agro_icon.png" alt="Logo" class="mmmu-logo"/> -->
+          <span class="mmmu">HalDec-Bench</span>
+        </h1>
+      </div>
+    </section>
+    
+    
+
+
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Example</h2>
+            <div class="content has-text-justified">
+              <!-- <img src="static/images/ex_annotation_picture.png" alt="ex_annotation" class="center" style="width: 110%; max-width: 110%;"> -->
+              <div style="text-align: center;">
+                <img src="static/images/ex_annotation_picture.png" alt="ex_annotation" style="width: 110%; max-width: 110%;">
+              </div>              
+              <br>
+              <p>
+                <b>Hallucinated sentences in HalDec-Bench.</b>
+                Hallucinated portions are often subtle, requiring fine-grained image-text alignment ability to detect them.
+              </p>
+            </div>
+          </div>
+        </div>
+    
+
+        <div class="columns is-centered has-text-centered"  style="margin-top: 3em;">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Stats of HalDec-Bench</h2>
+            <div class="content has-text-justified">
+              <!-- <p>
+                AgroBench includes multiple topics with a diverse range of categories. The total accuracy is calculated by the average of each task to mitigate the difference in QAs.
+              </p> -->
+                <img src="static/images/comparison_table.png" alt="algebraic reasoning" class="center" style="width: 80%;">
+                <p>
+                  <b>Comparison with other datasets. </b> HalDec-Bench evaluates on a substantially broader vocabulary, using real hallucinations naturally produced by VLMs rather than synthetically constructed ones. HalDec-Bench includes image-sentence pairs generated by diverse VLMs and records the source model for each pair, enabling detailed analysis of model-specific hallucination patterns.
+                </p>
+            </div>
+          </div>
+        </div>
+        <div class="columns is-centered has-text-centered"  style="margin-top: 3em;">
+          <div class="column is-four-fifths">
+            <!-- <h2 class="title is-3">Example Annotations</h2> -->
+            <div class="content has-text-justified">
+                <img src="static/images/details.png" alt="algebraic reasoning" class="center">
+                <p> <b>Details of our HalDec-Bench.</b> (a) We confirm that our dataset includes diverse caption length. (b) We also annotate hallucination types into 8 categories. The rarest type is Text, but it still includes nearly 500 instances, enabling deeper analysis. (c) We create captions using diverse VLMs as Captioners, enabling analysis with combinations of diverse Detector models. (d) An example of an annotation.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESULTS SECTION -->
+    <section class="hero is-light is-small">
+      <div class="hero-body has-text-centered">
+        <h1 class="title is-1 mmmu">Overview of Results</h1>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+    
+        <!-- RESULTS -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Main Results</h2>
+            <div class="content has-text-justified">
+              <img src="static/images/AUROC.png" alt="algebraic reasoning" class="center">
+              <p>
+                <b>AUROC results across VLMs.</b> 
+              </p>
+            </div>
+            <div style="max-width: 80%; margin: 2em auto; padding: 1em 1.2em; border-left: 4px solid #ff8484; background: #fff8f8; border-radius: 6px;">
+              <p style="margin: 0 0 .6em; font-weight: 600; text-align: left;">
+                <i class="fa-solid fa-pen-to-square" style="color:#ff8484; margin-right: .4em;"></i>
+                Key Points
+              </p>
+              <ul style="margin: 0; padding-left: 1.4em; text-align: left; line-height: 1.6; list-style-type: disc;">
+                <li>HalDec-Bench covers diverse levels of hallucination detection.</li>
+                <li>CLIP-based models tailored for compositional alignment remain nearly blind.  </li>
+                <li>Gemini-3-Pro shows the best performance of all models, while Llama-4, the best open-source model.</li>
+                <li>Advanced captioners produces hard-to-detect errors.</li>
+              </ul>
+            </div>
+            
+          
+          </div>
+        </div>
+
+
+    
+
+      </div>
+
+      <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+          <h1 class="title is-1 mmmu">Analysys</h1>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+
+
+          <!-- RESULTS -->
+          <div class="columns is-centered has-text-centered"  style="margin-top: 3em;">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Correlation with MMMU performance</h2>
+              <div class="content has-text-justified">
+                <img src="static/images/mmmu.png" alt="algebraic reasoning" class="center">
+                <p>
+                The size of plots indicates the parameter size.<b> Left: MMMU performance measured on Captioners (X-axis) vs. AUROC measured by GPT-5-mini (Y-axis) for each Captioner. </b> Advanced Captioners tend to produce hard-to-detect hallucinations. <b> Right: MMMU (X-axis) vs. AUROC (Y-axis) measured on each detector.</b>  Detectors with better MMMU performance tend to perform better on HalDec-Bench.
+                </p>
+              </div>
+              <div style="max-width: 80%; margin: 2em auto; padding: 1em 1.2em; border-left: 4px solid #ff8484; background: #fff8f8; border-radius: 6px;">
+                <p style="margin: 0 0 .6em; font-weight: 600; text-align: left;">
+                  <i class="fa-solid fa-pen-to-square" style="color:#ff8484; margin-right: .4em;"></i>
+                  Key Points
+                </p>
+                <ul style="margin: 0; padding-left: 1.4em; text-align: left; line-height: 1.6; list-style-type: disc;">
+                  <li>Stronger Captioners generate hallucinations that are harder to detect.</li>
+                  <li>The performance on HalDec-Bench is correlated with that on MMMU.</li>
+                </ul>
+              </div>
+              
+          
+            </div>
+          </div>
+      
+          <div class="columns is-centered has-text-centered"  style="margin-top: 3em;">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Positional bias</h2>
+              <div class="content has-text-justified">
+                <img src="static/images/position.png" alt="algebraic reasoning" class="center" style="width: 110%; max-width: 110%;">
+                <p>
+                  <b>Detectors show positional bias in scoring.</b> We average the detectors’ correctness scores (Y-axis) by sentence position (X-axis) and visualize the results using GPT-4o (Left) and Llama-4 (Right) as detectors. Both detectors assign higher scores to sentences appearing near the beginning of the output. The detector is not provided with any positional information during inference.
+                </p>
+              </div>
+              <div style="max-width: 80%; margin: 2em auto; padding: 1em 1.2em; border-left: 4px solid #ff8484; background: #fff8f8; border-radius: 6px;">
+                <p style="margin: 0 0 .6em; font-weight: 600; text-align: left;">
+                  <i class="fa-solid fa-pen-to-square" style="color:#ff8484; margin-right: .4em;"></i>
+                  Key Points
+                </p>
+                <ul style="margin: 0; padding-left: 1.4em; text-align: left; line-height: 1.6; list-style-type: disc;">
+                  <li>The detectors give a higher score to the sentences located near the beginning of the output.</li>
+                </ul>
+              </div>
+              
+          
+            </div>
+          </div>
+          <!-- <div class="columns is-centered has-text-centered"  style="margin-top: 3em;">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Comparison to existing datasets</h2>
+              <div class="content has-text-justified">
+                <img src="static/images/existing.png" alt="algebraic reasoning" class="center">
+                <p>
+                  <b>Comparison to existing datasets (AUROC). </b>We compare with other HalDec datasets and the dataset used to assess VLM’s compositionality understanding. Numbers of prior benchmarks that exceed HalDecBench are highlighted. This result indicates that HalDec-Bench is more challenging than existing datasets.
+                </p>
+              </div>
+              <div style="max-width: 80%; margin: 2em auto; padding: 1em 1.2em; border-left: 4px solid #ff8484; background: #fff8f8; border-radius: 6px;">
+                <p style="margin: 0 0 .6em; font-weight: 600; text-align: left;">
+                  <i class="fa-solid fa-pen-to-square" style="color:#ff8484; margin-right: .4em;"></i>
+                  Key Points
+                </p>
+                <ul style="margin: 0; padding-left: 1.4em; text-align: left; line-height: 1.6; list-style-type: disc;">
+                  <li>ShareGPT is the easiest split of HalDec-Bench, with performance close to HAT. </li>
+                  <li>All detectors excel on FOIL, suggesting these hallucinations are easy to detect for current SOTA VLMs.</li>
+                </ul>
+              </div>
+              
+          
+            </div>
+          </div> -->
+
+          <div class="columns is-centered has-text-centered"  style="margin-top: 3em;">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">For own hallucination</h2>
+              <div class="content has-text-justified">
+                <img src="static/images/likelihood.png" alt="algebraic reasoning" class="center" style="width: 70%; max-width: 70%;">
+                <p>
+                  The likelihood of sentences measured by the detector, Llama-4. Incorrect sentences tend to be more plausible than correct ones in terms of the likelihood.
+                </p>
+              </div>
+              <div style="max-width: 80%; margin: 2em auto; padding: 1em 1.2em; border-left: 4px solid #ff8484; background: #fff8f8; border-radius: 6px;">
+                <p style="margin: 0 0 .6em; font-weight: 600; text-align: left;">
+                  <i class="fa-solid fa-pen-to-square" style="color:#ff8484; margin-right: .4em;"></i>
+                  Key Points
+                </p>
+                <ul style="margin: 0; padding-left: 1.4em; text-align: left; line-height: 1.6; list-style-type: disc;">
+                  <li> The decoder assigns higher likelihood to hallucinated sentences, suggesting that these sentences are more plausible from the perspective of the language model’s learned language patterns. </li>
+                  <li> This result suggests that the detector does not rely solely on sentence likelihood when judging caption correctness.  </li>
+                </ul>
+              </div>
+              
+          
+            </div>
+          </div>
+
+                    <div class="columns is-centered has-text-centered"  style="margin-top: 3em;">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Comparison to existing datasets</h2>
+              <div class="content has-text-justified">
+                <img src="static/images/comparison.png" alt="algebraic reasoning" class="center">
+                <p>
+                  <b>Comparison to existing datasets for hallucination detection and compositionality understanding (AUROC). </b> 
+                </p>
+              </div>
+              <div style="max-width: 80%; margin: 2em auto; padding: 1em 1.2em; border-left: 4px solid #ff8484; background: #fff8f8; border-radius: 6px;">
+                <p style="margin: 0 0 .6em; font-weight: 600; text-align: left;">
+                  <i class="fa-solid fa-pen-to-square" style="color:#ff8484; margin-right: .4em;"></i>
+                  Key Points
+                </p>
+                <ul style="margin: 0; padding-left: 1.4em; text-align: left; line-height: 1.6; list-style-type: disc;">
+                  <li>HalDec-Bench serves as a new indicator of an image-text alignment capability. </li>
+                  <li>Strong performance on prior benchmarks does not necessarily translate to strong performance on HalDec-Bench. </li>
+                </ul>
+              </div>
+              
+          
+            </div>
+          </div>
+
+          <div class="columns is-centered has-text-centered" style="margin-top: 3em;">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Model ensemble </h2>
+              <div class="content has-text-justified">
+                <img src="static/images/ensemble.png" alt="algebraic reasoning" class="center">
+                <p>
+                  <b>Ensembling improves performance in many cases. </b> The performance difference from the better model used for ensembling is highlighted.
+                </p>
+              </div>
+              <div style="max-width: 80%; margin: 2em auto; padding: 1em 1.2em; border-left: 4px solid #ff8484; background: #fff8f8; border-radius: 6px;">
+                <p style="margin: 0 0 .6em; font-weight: 600; text-align: left;">
+                  <i class="fa-solid fa-pen-to-square" style="color:#ff8484; margin-right: .4em;"></i>
+                  Key Points
+                </p>
+                <ul style="margin: 0; padding-left: 1.4em; text-align: left; line-height: 1.6; list-style-type: disc;">
+                  <li>Ensembling improves performance.</li>
+                  <li>Boosting each detector’s performance is crucial in detecting hallucinations in challenging cases. </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- ANALYSIS -->
+          <!-- <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Analysis</h2>
+              <div class="content has-text-justified">
+                <img src="static/images/parameter_size.png" alt="algebraic reasoning" class="center">
+                <p>
+                  The size of plots indicates the parameter size. Left: MMMU performance measured on Captioners (X-axis) vs. AUROC measured by GPT-5-mini (Y-axis) for each Captioner. Advanced Captioners tend to produce hard-to-detect hallucinations. Right: MMMU (X-axis) vs. AUROC (Y-axis) measured on each detector. Detectors with better MMMU performance tend to show better performance on our benchmark.
+                </p>
+              </div>
+      
+       -->
+        </div>
+  
+        <!-------------------------------------------------------------------- Error Example  -------------------------------------------------------------------->
+        <div class="columns is-centered m-6">
+          <div class="column is-full has-text-centered content">
+            <h2 class="title is-3" id="examples">Dataset Examples</h2>
+            <div class="carousel results-carousel">
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/sharegpt.png" alt="grade-lv" width="60%"/>
+                </div>
+              </div>
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/llava.png" alt="grade-lv" width="60%"/>
+                </div>
+              </div>
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/qwen2.png" alt="grade-lv" width="60%"/>
+                </div>
+              </div>
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/gpt4o.png" alt="grade-lv" width="55%"/>
+                </div>
+              </div>
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/cogvlm.png" alt="grade-lv" width="55%"/>
+                </div>
+              </div>
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/llama-4.png" alt="grade-lv" width="60%"/>
+                </div>
+              </div>
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/sd.png" alt="grade-lv" width="60%"/>
+                </div>
+              </div>
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="static/images/examples/gpt-gen.png" alt="grade-lv" width="60%"/>
+                </div>
+              </div>
+
+    </section>
+
+    <!-- @PAN TODO: bibtex -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title is-3 has-text-centered">BibTeX</h2>
+        <pre><code>
+@misc{saito2026haldecbenchbenchmarkinghallucinationdetector,
+      title={HalDec-Bench: Benchmarking Hallucination Detector in Image Captioning}, 
+      author={Kuniaki Saito and Risa Shinoda and Shohei Tanaka and Tosho Hirasawa and Fumio Okura and Yoshitaka Ushiku},
+      year={2026},
+      eprint={2603.15253},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2603.15253}, 
+}
+    </code></pre>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license"
+                                                  href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
